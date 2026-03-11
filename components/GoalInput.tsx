@@ -30,6 +30,7 @@ export function GoalInput({ onAddGoal }: GoalInputProps) {
                 onChangeText={goalInputHandler}
                 value={goalInputText}
                 onSubmitEditing={goalSubmitHandler}
+                placeholderTextColor='#cccccc'
             />
 
             <View>
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         padding:7,
         borderColor: '#E1F4CB',
+        color: 'white'
     },
     addGoalButton: {
         backgroundColor:"#F1BF98",
