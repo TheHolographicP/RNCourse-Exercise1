@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet,  View, Button, TextInput, GestureResponderEvent } from 'react-native';''
+import { StyleSheet,  View, Button, TextInput, Pressable } from 'react-native';''
 
 interface GoalInputProps {
     onAddGoal: (goal: string) => void;
