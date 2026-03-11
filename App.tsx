@@ -2,11 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
-
+type CourseGoal = {
+  id: number
+  val: string
+}
 
 export default function App() {
   const [goalInputText, setGoalInputText] = useState('')
-  const [courseGoals, setCourseGoals] = useState<string[]>([])
+  const [courseGoals, setCourseGoals] = useState<CourseGoal[]>([])
 
   function goalInputHandler(enteredText: string)
   {
@@ -14,7 +17,15 @@ export default function App() {
   }
   function addGoalHandler()
   {
-    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, goalInputText])
+    var Id = courseGoals.length + 1
+
+    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, 
+      {
+        id: Id,
+        val: goalInputText
+      }
+      
+    ])
   }
 
   return (
@@ -27,12 +38,15 @@ export default function App() {
         style={styles.goalsContainer}
         data={courseGoals}
         renderItem={
-          ({item}) => (
-            <View key={item} style={styles.goalItem}>
-              <Text>{item}</Text>
+          (item) => (
+            <View style={styles.goalItem}>
+              <Text>Id:{item.item.id} | {item.item.val}</Text>
             </View>
           )
         }
+        keyExtractor={(item, index) => {
+          return item.id.toString()
+        }}
       >
       </FlatList>
     </View>
