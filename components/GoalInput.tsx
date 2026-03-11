@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet,  View, Button, TextInput, Pressable } from 'react-native';''
+import { StyleSheet,  View, Button, TextInput, Text, Modal, Pressable } from 'react-native';''
 
 interface GoalInputProps {
     onAddGoal: (goal: string) => void;
@@ -31,7 +31,13 @@ export function GoalInput({ onAddGoal }: GoalInputProps) {
                 value={goalInputText}
                 onSubmitEditing={goalSubmitHandler}
             />
-            <Button title="Add Goal" onPress={callAddGoal}/>
+
+            <View>
+                <Pressable onPress={callAddGoal} style={({pressed}) => pressed ? styles.addGoalButtonPressed : styles.addGoalButton}>
+                    <Text>Add Goal</Text>
+                </Pressable>
+            </View>
+            
         </View>
     )
 };
@@ -47,7 +53,18 @@ const styles = StyleSheet.create({
     goalInput:{
         flex: 1,
         borderWidth: 1,
-        padding:3,
-        borderColor: 'white',
+        borderRadius: 6,
+        padding:7,
+        borderColor: '#E1F4CB',
     },
+    addGoalButton: {
+        backgroundColor:"#F1BF98",
+        borderRadius: 6,
+        padding: 8
+    },
+    addGoalButtonPressed: {
+        backgroundColor:"#b18d72",
+        borderRadius: 6,
+        padding: 8
+    }
 });
