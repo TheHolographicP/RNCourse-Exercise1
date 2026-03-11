@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
   goalsContainer:{
     flex: 1,
     borderTopColor: 'grey',
-    borderTopWidth: 1
+    borderTopWidth: 1,
+    alignSelf: 'stretch'
   },
   headerImage:{
     width:100,
