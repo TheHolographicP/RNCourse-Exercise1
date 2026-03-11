@@ -12,13 +12,25 @@ export function GoalInput({ onAddGoal }: GoalInputProps) {
         setGoalInputText(enteredText)
     }
 
+    function goalSubmitHandler(): void {
+        onAddGoal(goalInputText)
+        setGoalInputText('')
+    }
+
     function callAddGoal(): void {
-        onAddGoal(goalInputText);
+        onAddGoal(goalInputText)
+        setGoalInputText('')
     }
 
     return (
         <View style={styles.inputContainer}>
-            <TextInput placeholder="Course Goal" style={styles.goalInput} onChangeText={goalInputHandler}/>
+            <TextInput 
+                placeholder="Course Goal"
+                style={styles.goalInput}
+                onChangeText={goalInputHandler}
+                value={goalInputText}
+                onSubmitEditing={goalSubmitHandler}
+            />
             <Button title="Add Goal" onPress={callAddGoal}/>
         </View>
     )
