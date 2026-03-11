@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet,  View,FlatList } from 'react-native';
+import { StyleSheet,  View,FlatList, Image } from 'react-native';
 import type {CourseGoal} from 'types/types'
 
 import { GoalItem } from 'components/GoalItem'
@@ -30,22 +30,29 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler}/>
-      <FlatList 
-        style={styles.goalsContainer}
-        data={courseGoals}
-        renderItem={
-          (item) => (
-            GoalItem(item.item, deleteGoalHandler)
-          )
-        }
-        keyExtractor={(item, index) => {
-          return item.id.toString()
-        }}
-      >
-      </FlatList>
-    </View>
+    <>
+      <StatusBar style='light'></StatusBar>
+      <View style={styles.appContainer}>
+        <Image 
+          source={require('assets/goal.png')}
+          style={styles.headerImage}
+        />
+        <GoalInput onAddGoal={addGoalHandler}/>
+        <FlatList 
+          style={styles.goalsContainer}
+          data={courseGoals}
+          renderItem={
+            (item) => (
+              GoalItem(item.item, deleteGoalHandler)
+            )
+          }
+          keyExtractor={(item, index) => {
+            return item.id.toString()
+          }}
+        >
+        </FlatList>
+      </View>
+    </>
   );
 }
 
@@ -54,12 +61,16 @@ const styles = StyleSheet.create({
     paddingTop:50,
     paddingHorizontal:16,
     flex:1,
-    backgroundColor:'#717568'
+    backgroundColor:'#717568',
+    alignItems:'center'
   },
   goalsContainer:{
     flex: 1,
     borderTopColor: 'grey',
     borderTopWidth: 1
   },
-
+  headerImage:{
+    width:100,
+    height:100,
+  }
 });
