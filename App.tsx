@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 
 
 export default function App() {
   const [goalInputText, setGoalInputText] = useState('')
-
+  const [courseGoals, setCourseGoals] = useState<string[]>([])
 
   function goalInputHandler(enteredText: string)
   {
@@ -14,7 +14,7 @@ export default function App() {
   }
   function addGoalHandler()
   {
-    console.log(goalInputText)
+    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, goalInputText])
   }
 
   return (
@@ -23,10 +23,18 @@ export default function App() {
         <TextInput placeholder="Course Goal" style={styles.goalInput} onChangeText={goalInputHandler}/>
         <Button title="Add Goal" onPress={addGoalHandler}/>
       </View>
-      <View style={styles.goalsContainer}>
-        <Text>Big list of goals</Text>
-
-      </View>
+      <FlatList 
+        style={styles.goalsContainer}
+        data={courseGoals}
+        renderItem={
+          ({item}) => (
+            <View key={item} style={styles.goalItem}>
+              <Text>{item}</Text>
+            </View>
+          )
+        }
+      >
+      </FlatList>
     </View>
   );
 }
@@ -35,7 +43,8 @@ const styles = StyleSheet.create({
   appContainer: {
     paddingTop:50,
     paddingHorizontal:16,
-    flex:1
+    flex:1,
+    backgroundColor:'#717568'
   },
   inputContainer: {
     flexDirection: 'row',
@@ -47,11 +56,18 @@ const styles = StyleSheet.create({
   goalInput:{
     flex: 1,
     borderWidth: 1,
-    padding:3
+    padding:3,
+    borderColor: 'white',
   },
   goalsContainer:{
     flex: 1,
     borderTopColor: 'grey',
     borderTopWidth: 1
+  },
+  goalItem:{
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: '#BACBA9'
   }
 });
